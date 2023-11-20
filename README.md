@@ -12,3 +12,5 @@ WHEN I click on an existing note in the list in the left-hand column
 THEN that note appears in the right-hand column and a "New Note" button appears in the navigation
 WHEN I click on the "New Note" button in the navigation at the top of the page
 THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column and the button disappears
+
+This app was a lot of work to figure out as I struggle a lot with backend. Getting deployed on Heroku wass not an easy task either and something I need to get better at. I used a lot of research on the internet to try to figure out what direction to head in and struggled a good bit on this. I am going to turn it in half finished as I need to catch up on other assignments and really dont want to fail the course. I tried my best and will try to return to touch things up.
