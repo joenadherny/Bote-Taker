@@ -1,4 +1,11 @@
 # Note-Taker
+User Story-
+AS A small business owner
+I WANT to be able to write and save notes
+SO THAT I can organize my thoughts and keep track of tasks I need to complete
+
+Acceptance Criteria-
+
 GIVEN a note-taking application
 WHEN I open the Note Taker
 THEN I am presented with a landing page with a link to a notes page
@@ -13,4 +20,13 @@ THEN that note appears in the right-hand column and a "New Note" button appears 
 WHEN I click on the "New Note" button in the navigation at the top of the page
 THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column and the button disappears
 
-This app was a lot of work to figure out as I struggle a lot with backend. Getting deployed on Heroku wass not an easy task either and something I need to get better at. I used a lot of research on the internet to try to figure out what direction to head in and struggled a good bit on this. I am going to turn it in half finished as I need to catch up on other assignments and really dont want to fail the course. I tried my best and will try to return to touch things up.
+Deployment and Repo Links-
+
+
+Screenshots-
+
+Sources- 
+Express Documentation - https://expressjs.com/
+ChatGPT - https://openai.com/chatgpt 
+
+This app was a lot of work to figure out as I struggle a lot with backend. Getting deployed on Heroku wass not an easy task either and something I need to get better at. I used a lot of research on the internet to try to figure out what direction to head in and struggled a good bit on this. I am going to turn it in half finished as I need to catch up on other assignments and really dont want to fail the course. I tried my best and will try to return to touch things up. I used Chat Gpt when I got really stuck on certain things. 
