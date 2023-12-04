@@ -1,83 +1,106 @@
 // const express = require('express');
-// const bodyParser = require('body-parser');
-// const path = require('path');
+// const fs = require('fs');
+// const { v4: uuidv4 } = require('uuid');
 
 // const app = express();
-// const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3001;
+// const path= require('path');
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.static('develop/public'));
 
-// // Set up middleware
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static('public'));
+// // HTML Routes
 
-// // Routes
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/views/index.html'));
-// });
-
+// // Route to display the "Notes" page
 // app.get('/notes', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/views/notes.html'));
+//   res.sendFile(__dirname + 'develop', 'public', 'notes.html');
 // });
 
-// // Start server
+// // Route to display the homepage
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + 'develop', 'public', 'index.html');
+// });
+
+// // API Routes
+
+// // Get the list of notes
+// app.get('/api/notes', (req, res) => {
+//   const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json', 'utf8'));
+//   res.json(notes);
+// });
+
+// // Create a new note
+// app.post('/api/notes', (req, res) => {
+//   const newNote = req.body;
+//   newNote.id = uuidv4();
+//   const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json', 'utf8'));
+//   notes.push(newNote);
+//   fs.writeFileSync('./Develop/db/db.json', JSON.stringify(notes, null, 2)); 
+//   res.json(newNote);
+// });
+
+// // Delete a note by its ID
+// app.delete('/api/notes/:id', (req, res) => {
+//   const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json', 'utf8')); 
+//   const noteId = req.params.id;
+
+//   // Filter out the notes to be deleted
+//   const updatedNotes = notes.filter((note) => note.id !== noteId);
+
+//   // Write the updated notes to db.json
+//   fs.writeFileSync('./Develop/db/db.json', JSON.stringify(updatedNotes, null, 2)); 
+
+//   res.json({ message: 'Note deleted' });
+// });
+
+// // Start the server
 // app.listen(PORT, () => {
 //   console.log(`Server is running on http://localhost:${PORT}`);
 // });
 const express = require('express');
-const fs = require('fs/promises');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
-const dataFilePath = path.join(__dirname, 'data', 'notes.json');
+// Routes
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
-// Read notes from the file
-const readNotesFromFile = async () => {
-  try {
-    const data = await fs.readFile(dataFilePath, 'utf8');
-    return JSON.parse(data) || [];
-  } catch (error) {
-    return [];
-  }
-};
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/note.html'));
+});
 
-// Write notes to the file
-const writeNotesToFile = async (notes) => {
-  await fs.writeFile(dataFilePath, JSON.stringify(notes), 'utf8');
-};
-
-// API endpoint to get all notes
-app.get('/api/notes', async (req, res) => {
-  const notes = await readNotesFromFile();
+app.get('/api/notes', (req, res) => {
+  const notes = JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
   res.json(notes);
 });
 
-// API endpoint to save a new note
-app.post('/api/notes', async (req, res) => {
+app.post('/api/notes', (req, res) => {
   const newNote = req.body;
-  const notes = await readNotesFromFile();
+  const notes = JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
   newNote.id = notes.length + 1;
   notes.push(newNote);
-  await writeNotesToFile(notes);
+  fs.writeFileSync('db/db.json', JSON.stringify(notes));
   res.json(newNote);
 });
 
-// API endpoint to delete a note
-app.delete('/api/notes/:id', async (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
   const noteId = parseInt(req.params.id);
-  let notes = await readNotesFromFile();
+  let notes = JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
   notes = notes.filter((note) => note.id !== noteId);
-  await writeNotesToFile(notes);
+  fs.writeFileSync('db/db.json', JSON.stringify(notes));
   res.json({ success: true });
 });
 
-// Serve static files
-app.use(express.static('public'));
-
-// Start the server
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
-
