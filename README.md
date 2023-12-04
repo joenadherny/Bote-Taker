@@ -20,7 +20,8 @@ THEN that note appears in the right-hand column and a "New Note" button appears 
 WHEN I click on the "New Note" button in the navigation at the top of the page
 THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column and the button disappears
 
-Deployment and Repo Links-
+Deployment and Repo Links- https://github.com/joenadherny/Bote-Taker
+
 
 
 Screenshots-
@@ -29,4 +30,4 @@ Sources-
 Express Documentation - https://expressjs.com/
 ChatGPT - https://openai.com/chatgpt 
 
-This app was a lot of work to figure out as I struggle a lot with backend. Getting deployed on Heroku wass not an easy task either and something I need to get better at. I used a lot of research on the internet to try to figure out what direction to head in and struggled a good bit on this. I am going to turn it in half finished as I need to catch up on other assignments and really dont want to fail the course. I tried my best and will try to return to touch things up. I used Chat Gpt when I got really stuck on certain things. 
+I have all the routes set up correctly and I can not get the second page to render correctly, I don't know what else to do as I know my sever is set up correctly and the frontend is already done so I don't know why I can't figure it out. I stil deployed on Heroku and tried to meet as much acceptance criteria as possible to meet the minimum. 
